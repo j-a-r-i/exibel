@@ -4,6 +4,7 @@ This is a keyboard driver for Exibel GKX-C keyboard.
 
 You need to solder Stm32F103xB board into keyboard.
 
+
 * Keyboard layout
 
 
@@ -11,7 +12,7 @@ You need to solder Stm32F103xB board into keyboard.
 
 Legend:
 
-|        |       |
-|--------+-------|
-| Normal | FN    |
-| Shift  | AltGr |
+|      | left   | right |
+|------+--------+-------|
+| up   | Normal | Fn    |
+| down | Shift  | AltGr |
