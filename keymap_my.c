@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ) {  \
 {KC_##K12, KC_##K13, KC_##K14, KC_##K15, KC_##K16, KC_##K11, KC_##K25, KC_##K43, KC_##K37, KC_##K22, KC_##K23, KC_##K24, KC_##K21, KC_##K31, KC_##K33, KC_##K34, KC_##K35, KC_##K36 }, \
 {KC_##K28, KC_##K0E, KC_##K2A, KC_##K07, KC_NO,    KC_##K01, KC_##K29, KC_##K19, KC_##K26, KC_NO,    KC_##K0C, KC_##K0D, KC_NO,    KC_##K18, KC_##K02, KC_##K03, KC_##K04, KC_##K06 }, \
-{KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K17, KC_##K1B, KC_##K41, KC_NO,    KC_##K1A, KC_##K05, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
+{KC_NO,    KC_NO,    KC_NO,    KC_##K16, KC_NO,    KC_##K17, KC_##K1B, KC_##K41, KC_NO,    KC_##K1A, KC_##K05, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO    }, \
 {KC_##K0B, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K08, KC_NO,    KC_NO,    KC_##K39, KC_NO,    KC_##K09, KC_##K0A, KC_NO,    KC_##K1E, KC_NO,    KC_##K3D, KC_NO,    KC_NO,   }, \
 {KC_NO,    KC_##K27, KC_##K2D, KC_NO,    KC_NO,    KC_##K2B, KC_NO,    KC_NO,    KC_##K42, KC_NO,    KC_NO,    KC_##K2C, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,   }, \
 {KC_##K3A, KC_##K3B, KC_##K3C, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K38, KC_##K45, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,   }, \
