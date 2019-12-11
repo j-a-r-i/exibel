@@ -169,11 +169,11 @@ static void  init_cols(void)
 		    BIT12 |
 		    BIT13 |
 		    BIT14 |
-		    BIT15, 0, PAL_MODE_INPUT_PULLUP);
+		    BIT15, 0, PAL_MODE_INPUT_PULLDOWN);
     palSetGroupMode(GPIOA,
                     BIT7 |
 		    BIT8 |
-		    BIT15, 0, PAL_MODE_INPUT_PULLUP);
+		    BIT15, 0, PAL_MODE_INPUT_PULLDOWN);
 }
 
 /* Returns status of switches(1:on, 0:off) */
@@ -182,24 +182,24 @@ static matrix_row_t read_cols(void)
     uint32_t porta = palReadPort(GPIOA);
     uint32_t portb = palReadPort(GPIOB);
     
-    return (((portb & BIT0 ) == BIT0 ) ? 0 : (1<<0)) |
-	   (((portb & BIT1 ) == BIT1 ) ? 0 : (1<<1)) |
-	   (((portb & BIT3 ) == BIT3 ) ? 0 : (1<<2)) |
-           (((portb & BIT4 ) == BIT4 ) ? 0 : (1<<3)) |
-	   (((portb & BIT5 ) == BIT5 ) ? 0 : (1<<4)) |
-	   (((portb & BIT6 ) == BIT6 ) ? 0 : (1<<5)) |
-	   (((portb & BIT7 ) == BIT7 ) ? 0 : (1<<6)) |
-	   (((portb & BIT8 ) == BIT8 ) ? 0 : (1<<7)) |
-	   (((portb & BIT9 ) == BIT9 ) ? 0 : (1<<8)) |
-	   (((portb & BIT10) == BIT10) ? 0 : (1<<9)) |
-	   (((portb & BIT11) == BIT11) ? 0 : (1<<10)) |
-	   (((portb & BIT12) == BIT12) ? 0 : (1<<11)) |
-	   (((portb & BIT13) == BIT13) ? 0 : (1<<12)) |
-	   (((portb & BIT14) == BIT14) ? 0 : (1<<13)) |
-	   (((portb & BIT15) == BIT15) ? 0 : (1<<14)) |
-	   (((porta & BIT7 ) == BIT7 ) ? 0 : (1UL<<15)) |
-	   (((porta & BIT8 ) == BIT8 ) ? 0 : (1UL<<16)) |
-	   (((porta & BIT15) == BIT15) ? 0 : (1UL<<17));
+    return (((portb & BIT0 ) == BIT0 ) ? (1<<0) : 0) |
+	   (((portb & BIT1 ) == BIT1 ) ? (1<<1) : 0) |
+	   (((portb & BIT3 ) == BIT3 ) ? (1<<2) : 0) |
+           (((portb & BIT4 ) == BIT4 ) ? (1<<3) : 0) |
+	   (((portb & BIT5 ) == BIT5 ) ? (1<<4) : 0) |
+	   (((portb & BIT6 ) == BIT6 ) ? (1<<5) : 0) |
+	   (((portb & BIT7 ) == BIT7 ) ? (1<<6) : 0) |
+	   (((portb & BIT8 ) == BIT8 ) ? (1<<7) : 0) |
+	   (((portb & BIT9 ) == BIT9 ) ? (1<<8) : 0) |
+	   (((portb & BIT10) == BIT10) ? (1<<9) : 0) |
+	   (((portb & BIT11) == BIT11) ? (1<<10) : 0) |
+	   (((portb & BIT12) == BIT12) ? (1<<11) : 0) |
+	   (((portb & BIT13) == BIT13) ? (1<<12) : 0) |
+	   (((portb & BIT14) == BIT14) ? (1<<13) : 0) |
+	   (((portb & BIT15) == BIT15) ? (1<<14) : 0) |
+	   (((porta & BIT7 ) == BIT7 ) ? (1UL<<15) : 0) |
+	   (((porta & BIT8 ) == BIT8 ) ? (1UL<<16) : 0) |
+	   (((porta & BIT15) == BIT15) ? (1UL<<17) : 0);
 }
 
 /* Row pin configuration
@@ -213,13 +213,14 @@ static void unselect_rows()
 		    BIT3 |
 		    BIT4 |
 		    BIT5 |
-		    BIT6, 0, PAL_MODE_INPUT);
+		    BIT6, 0, PAL_MODE_INPUT_PULLDOWN);
 }
 
 static void select_row(uint8_t row)
 {
     if (row < MATRIX_ROWS) {
 	palSetPadMode(GPIOA, row, PAL_MODE_OUTPUT_PUSHPULL);
-	palClearPad(  GPIOA, row);
+	//palClearPad(  GPIOA, row);
+	palSetPad(  GPIOA, row);
     }
 }

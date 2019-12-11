@@ -47,13 +47,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 {KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K32, KC_##K1C, KC_##K1D, KC_NO,    KC_NO,    KC_##K44, KC_NO,    KC_NO,    KC_NO,   }}
 //1         2         3         4         5         6         7         8         9         10        11        12        13       14         15        16        17        18
 
-static const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+/*
 [LAYER_BASE] = 
       KMAP(ESC,     1,    2,    3,    4,    5,    6,    7,    8,    9,    0,    MINS, EQL,  BSPACE,
-  	   TAB,      Q,    W,    E,    R,    T,    Y,    U,    I,    O,    P,    LBRC, RBRC, ENT,
+  	   TAB,      Q,    W,    E,    R,    T,    Y,    U,    I,    O,    P,    FN10, FN11, ENT,
 	   LCTRL,     A,    S,    D,    F,    G,    H,    J,    K,    L,    SCLN, QUOT, BSLASH,
 	   LSFT, NUBS, Z,    X,    C,    V,    B,    N,    M,    COMM, DOT,  SLASH, RSFT,
                  FN0,  LALT,                 FN1,                        FN2 , RCTRL),
+*/
+static const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+[LAYER_BASE] = 
+      KMAP(ESC,     1,    2,    3,    4,    5,    6,    7,    8,    9,    0,    MINS, FN14, BSPACE,
+  	   TAB,      Q,    W,    E,    R,    T,    Y,    U,    I,    O,    P,    FN10, FN11, ENT,
+	   CAPS,      A,    S,    D,    F,    G,    H,    J,    K,    L,    SCLN, QUOT, BSLASH,
+	   LSFT, NUBS, Z,    X,    C,    V,    B,    N,    M,    COMM, DOT,  SLASH, RSFT,
+                 FN0,  LALT,                SPACE,                        FN2 , RCTRL),
 
 [LAYER_LGUI] =
       KMAP(TRNS,    F1,   F2,   F3,   F4,   F5,   F6,   F7,   F8,   F9,   F10,  F11,  F12,  DEL,
@@ -87,7 +95,8 @@ static const action_t fn_actions[] = {
     [11] = ACTION_MODS_KEY(MOD_RALT, KC_0),   // }
     [12] = ACTION_MODS_KEY(MOD_RALT, KC_8),   // [
     [13] = ACTION_MODS_KEY(MOD_RALT, KC_9),   // ]
-    [14] = ACTION_MODS_KEY(MOD_RALT, KC_MINS) // backflash
+    [14] = ACTION_MODS_KEY(MOD_RALT, KC_MINS), // backflash
+    //   [15] = ACTION_LAYER_TOGGLE(1)
 };
 
 //------------------------------------------------------------------------------
@@ -104,6 +113,20 @@ uint8_t keymap_key_to_keycode(uint8_t layer, keypos_t key)
 	    add_key(base);
 	    send_keyboard_report();
 	    del_weak_mods(MOD_BIT(KC_LALT));
+	    del_key(base);
+	    send_keyboard_report();
+	    
+	    return KC_NO;
+	}
+    } else if (layer == LAYER_LGUI) {
+	uint8_t base = keymaps[LAYER_BASE][key.row][key.col];
+
+	if ((curKey == KC_TRNS) && (base != KC_NO)) {
+	    // sends LGUI+key
+	    add_weak_mods(MOD_BIT(KC_LGUI));
+	    add_key(base);
+	    send_keyboard_report();
+	    del_weak_mods(MOD_BIT(KC_LGUI));
 	    del_key(base);
 	    send_keyboard_report();
 	    
